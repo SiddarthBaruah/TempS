@@ -8,9 +8,11 @@ const UserFormPopup = ({ onClose, setUserID }) => {
   const [formData, setFormData] = useState({
     name: "",
     age: "",
-    email: "",
+    gender: "",
     occupation: "",
   });
+  const [otherSelected, setOtherSelected] = useState(false);
+  const [otherSelectedOccupation, setOtherSelectedOccupation] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,22 +70,38 @@ const UserFormPopup = ({ onClose, setUserID }) => {
 
           <div className="mb-4">
             <label
-              htmlFor="email"
+              htmlFor="gender"
               className="block text-gray-600 font-semibold"
             >
-              Email:
+              Gender:
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
+            <select
+              id="gender"
+              name="gender"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-            />
+              value={formData.gender}
+              onChange={(e) => {
+                setFormData({ ...formData, gender: e.target.value });
+                setOtherSelected(e.target.value === "Other");
+              }}
+            >
+              <option value="">Select your gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            {otherSelected && (
+              <input
+                type="text"
+                id="otherGender"
+                name="otherGender"
+                placeholder="Enter your gender"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 mt-2"
+                onChange={(e) =>
+                  setFormData({ ...formData, gender: e.target.value })
+                }
+              />
+            )}
           </div>
 
           <div className="mb-4">
@@ -93,17 +111,40 @@ const UserFormPopup = ({ onClose, setUserID }) => {
             >
               Occupation:
             </label>
-            <input
-              type="text"
+            <select
               id="occupation"
               name="occupation"
-              placeholder="Enter your occupation"
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
               value={formData.occupation}
-              onChange={(e) =>
-                setFormData({ ...formData, occupation: e.target.value })
-              }
-            />
+              onChange={(e) => {
+                setFormData({ ...formData, occupation: e.target.value });
+                setOtherSelectedOccupation(e.target.value === "Other");
+              }}
+            >
+              <option value="">Select your occupation</option>
+              <option value="Student">Student</option>
+              <option value="Employee">Employee</option>
+              <option value="Owner operator">Owner operator</option>
+              <option value="Self employed">Self employed</option>
+              <option value="Unemployed">Unemployed</option>
+              <option value="Factory worker">Factory worker</option>
+              <option value="Labourer">Labourer</option>
+              <option value="Retired">Retired</option>
+              <option value="Other">Other</option>
+            </select>
+            {otherSelectedOccupation && (
+              <input
+                type="text"
+                id="otherOccupation"
+                name="otherOccupation"
+                placeholder="Enter your occupation"
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 mt-2"
+                value={formData.otherOccupation}
+                onChange={(e) =>
+                  setFormData({ ...formData, occupation: e.target.value })
+                }
+              />
+            )}
           </div>
 
           <button

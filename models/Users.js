@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  email: {
+  gender: {
     type: String,
     required: false,
     default: "",
@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
   },
-  // Add other relevant user fields (e.g., email, address, etc.) as needed
+  // Add other relevant user fields (e.g., gender, address, etc.) as needed
 });
-module.exports = mongoose.models.User || mongoose.model("User", UserSchema);
+module.exports =
+  mongoose.models.NewUser || mongoose.model("NewUser", UserSchema);

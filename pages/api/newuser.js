@@ -10,7 +10,7 @@ export default async function newuser(req, res) {
 
   await connectToDatabase();
 
-  const { name, age, email, occupation } = req.body;
+  const { name, age, gender, occupation } = req.body;
   if (!name) {
     console.error("Invalid input: Name is required");
     return res.status(400).json({ message: "Invalid input" });
@@ -20,7 +20,7 @@ export default async function newuser(req, res) {
     var newuser = new User({
       name,
       age,
-      email,
+      gender,
       occupation,
     });
 
